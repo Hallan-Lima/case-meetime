@@ -1,10 +1,18 @@
+# Define a versão do arquivo docker-compose. A versão 3.8 é amplamente utilizada e compatível com recursos modernos do Docker.
 version: '3.8'
 
 services:
+  # Define o serviço da aplicação chamado "hubspot-integration".
   hubspot-integration:
+
     build:
+      # Define o contexto de build como o diretório pai, permitindo acesso a todos os arquivos necessários.
       context: ..
+      # Especifica o caminho do Dockerfile a ser utilizado para construir a imagem.
       dockerfile: docker/dockerfile
+    # Mapeia a porta 8080 do host para a porta 8080 do container, permitindo acesso externo à aplicação.
     ports:
       - "8080:8080"
+    # Configura a política de reinício do container. "unless-stopped" garante que o container será reiniciado automaticamente,
+    # exceto se for explicitamente parado pelo usuário, aumentando a resiliência em ambientes de produção.
     restart: unless-stopped

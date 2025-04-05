@@ -1,14 +1,21 @@
+# Utiliza a imagem base Eclipse Temurin com suporte ao JDK 17, ideal para aplicações Java modernas.
 FROM eclipse-temurin:17-jdk
 
+# Define o diretório de trabalho dentro do container como /app.
 WORKDIR /app
 
+# Copia o arquivo .jar gerado pelo build da aplicação para o diretório de trabalho no container.
+# O wildcard (*.jar) assume que o build gerou apenas um arquivo .jar na pasta target.
 COPY target/*.jar app.jar
 
-# Copia o application.properties
+# Copia o arquivo de configuração application.properties para um diretório específico dentro do container.
+# Isso permite que a aplicação utilize configurações externas ao .jar, facilitando a customização.
 COPY src/main/resources/application.properties /app/config/application.properties
 
-# Expõe a porta 8080
+# Expõe a porta 8080 para permitir o acesso à aplicação rodando no container.
+# Essa porta deve ser mapeada no comando `docker run` ou no arquivo docker-compose.yml.
 EXPOSE 8080
 
-# Roda a aplicação usando o .properties copiado
+# Define o comando de entrada para iniciar a aplicação.
+# O parâmetro `--spring.config.location` garante que o Spring Boot utilize o arquivo de configuração externo.
 ENTRYPOINT ["java", "-jar", "app.jar", "--spring.config.location=file:/app/config/application.properties"]
