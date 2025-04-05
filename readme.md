@@ -1,4 +1,4 @@
-# Hubspot Integration
+# Hubspot Integration 0.1.0
 
 ## **Sumário**
 1. [Introdução](#introdução)
