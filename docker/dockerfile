@@ -1,14 +1,14 @@
-# Imagem base com JDK
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 
-# Diretório da aplicação dentro do container
 WORKDIR /app
 
-# Copia o JAR gerado
-COPY target/hubspot-integration.jar app.jar
+COPY target/*.jar app.jar
 
-# Expõe a porta usada
+# Copia o application.properties
+COPY src/main/resources/application.properties /app/config/application.properties
+
+# Expõe a porta 8080
 EXPOSE 8080
 
-# Comando para iniciar a aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Roda a aplicação usando o .properties copiado
+ENTRYPOINT ["java", "-jar", "app.jar", "--spring.config.location=file:/app/config/application.properties"]

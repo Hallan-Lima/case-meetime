@@ -7,9 +7,4 @@ services:
       dockerfile: docker/dockerfile
     ports:
       - "8080:8080"
-    environment:
-      - HUBSPOT_CLIENT_ID=91c62537-1e47-420e-afc4-9ef041b30fa4
-      - HUBSPOT_CLIENT_SECRET=a460d5bc-af6e-4032-accd-73de4450fee1
-      - HUBSPOT_REDIRECT_URI=http://localhost:8080/auth/callback
-      - HUBSPOT_SCOPES=crm.objects.contacts.read+crm.objects.contacts.write
     restart: unless-stopped
