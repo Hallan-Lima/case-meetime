@@ -1,0 +1,14 @@
+# Imagem base com JDK
+FROM openjdk:17-jdk-slim
+
+# Diretório da aplicação dentro do container
+WORKDIR /app
+
+# Copia o JAR gerado
+COPY target/hubspot-integration.jar app.jar
+
+# Expõe a porta usada
+EXPOSE 8080
+
+# Comando para iniciar a aplicação
+ENTRYPOINT ["java", "-jar", "app.jar"]

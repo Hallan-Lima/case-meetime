@@ -9,5 +9,4 @@ public class HubspotIntegrationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HubspotIntegrationApplication.class, args);
 	}
-
 }
